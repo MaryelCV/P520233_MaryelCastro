@@ -30,13 +30,13 @@
         {
             this.TxtUsuario = new System.Windows.Forms.TextBox();
             this.TxtContrasennia = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnIngresar = new System.Windows.Forms.Button();
             this.BtnCerrar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.BtnContrasennia = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,16 +58,6 @@
             this.TxtContrasennia.TabIndex = 1;
             this.TxtContrasennia.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TxtContrasennia.UseSystemPasswordChar = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::P520233_MaryelCastro.Properties.Resources.Captura_de_pantalla_2023_10_03_213830;
-            this.pictureBox1.Location = new System.Drawing.Point(99, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(154, 122);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -93,6 +83,7 @@
             this.BtnIngresar.TabIndex = 5;
             this.BtnIngresar.Text = "INGRESAR";
             this.BtnIngresar.UseVisualStyleBackColor = false;
+            this.BtnIngresar.Click += new System.EventHandler(this.BtnIngresar_Click);
             // 
             // BtnCerrar
             // 
@@ -143,6 +134,16 @@
             this.BtnContrasennia.UseVisualStyleBackColor = false;
             this.BtnContrasennia.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnContrasennia_MouseDown);
             this.BtnContrasennia.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BtnContrasennia_MouseUp);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::P520233_MaryelCastro.Properties.Resources.Captura_de_pantalla_2023_10_03_213830;
+            this.pictureBox1.Location = new System.Drawing.Point(99, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(154, 122);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // FrmLogin
             // 

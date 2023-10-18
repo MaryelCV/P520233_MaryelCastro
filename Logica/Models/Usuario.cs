@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Logica.Models
 {
@@ -34,6 +35,25 @@ namespace Logica.Models
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
+
+            //Agregamos todos los parametros que solicita el SP de agregar
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Cedula", this.Cedula));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Nombre", this.Name));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Correo", this.Correo));
+            //Encriptar la contraseña
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", this.Contrasennia));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Direccion", this.Direccion));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@UsuarioRolID", this.MiUsuarioRol.UsuarioRolID));
+
+            int resultado = MiCnn.EjecutarDML("SPUsuariosAgregar");
+
+            if (resultado > 0) R = true;
+            {
+                return R;
+            }
+
             return R;
         }
         public bool Actualizar()
@@ -54,21 +74,57 @@ namespace Logica.Models
 
             return R;
         }
-        public bool ConsultarPorCedula(string Cedula)
+        public bool ConsultarPorCedula(string pCedula)
         {
             bool R = false;
+
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Cedula", pCedula));
+
+
+            DataTable dt = new DataTable();
+            dt = MiCnn.EjecutarSelect("SPUsuariosConsultarPorCedula");
+
+
+            if (dt != null && dt.Rows.Count > 0) R = true;
 
             return R;
         }
-        public bool ConsultarPorCorreo(string Correo)
+
+
+        public bool ConsultarPorCorreo(string pCorreo)
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Correo", pCorreo));
+
+
+            DataTable dt = new DataTable();
+            dt = MiCnn.EjecutarSelect("SPUsuariosConsultarPorCorreo");
+
+
+            if (dt != null && dt.Rows.Count > 0) R = true;
+
+
             return R;
+
         }
         public DataTable ListarActivos()
         {
             DataTable R = new DataTable();
+
+
+            //instancia de la clase conexion
+            Conexion MiCnn = new Conexion();
+
+            //El SP para listar requiere un parametro, hay que agregarlo
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@VerActivos", true));
+
+            R = MiCnn.EjecutarSelect("SPUsuariosListar");
+
 
             return R;
         }
