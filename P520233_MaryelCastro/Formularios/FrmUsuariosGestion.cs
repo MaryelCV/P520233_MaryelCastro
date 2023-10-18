@@ -128,7 +128,12 @@ namespace P520233_MaryelCastro.Formularios
                     return false;
                 }
 
-              
+                //ROLL DE USUARIO
+                if (CboxUsuarioTipoRol.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Debe seleccionar un Rol de Usuario", "Error de validación", MessageBoxButtons.OK);
+                    return false;
+                }
 
             }
 
