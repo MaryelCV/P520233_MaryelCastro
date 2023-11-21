@@ -72,12 +72,24 @@ namespace P520233_MaryelCastro.Formularios
         //Aqui van a estar todas las funcionalidades especificas y
         //que se pueden reutilizar DEBEN ser encapsuladas.
 
-        private void CargarListaUsuarios()
+        private void CargarListaUsuarios(bool VerActivos = true, string FiltroBusqueda = "")
         {
 
             Logica.Models.Usuario miusuario = new Logica.Models.Usuario();
 
             DataTable lista = new DataTable();
+
+            DataTable listaConFiltro = new DataTable();
+
+            if (!string.IsNullOrEmpty(FiltroBusqueda.Trim()))
+            {
+                //Si hay filtro de busqueda
+            }
+            else { 
+
+                //Si no hay filtro de busqueda
+            
+            }
 
             lista = miusuario.ListarActivos();
 
@@ -389,6 +401,99 @@ namespace P520233_MaryelCastro.Formularios
                 }
             }
         }
+
+
+
+
+        private void TxtUsuarioNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsuarioCorreo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e,false,true);
+        }
+
+        private void TxtUsuarioTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresNumeros(e);
+        }
+
+
+        //este no
+        private void TxtUsuarioContrasennia_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //este no
+
+        private void TxtUsuarioContrasennia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsuarioDireccion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsuarioCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresNumeros(e);
+        }
+
+        private void BtnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            if (MiUsuarioLocal.UsuarioID > 0)
+            {
+                string msg = string.Format("¿Estás seguro de eliminar el usuario{0}.?", MiUsuarioLocal.Name);
+
+                DialogResult respuesta = MessageBox.Show(msg, "Confirmación requerida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (respuesta == DialogResult.Yes && MiUsuarioLocal.Eliminar())
+                {
+                    MessageBox.Show("El Usuarios ha sido ELIMINADO", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LimpiarForm();
+                    CargarListaUsuarios();
+                    ActivarBotonAgregar();
+
+                }
+
+
+
+
+            }
+        }
+
+        private void CbVerActivos_CheckedChanged(object sender, EventArgs e)
+        {
+
+            CargarListaUsuarios();
+
+
+
+
+            if (CbVerActivos.Checked)
+
+            {
+                BtnEliminar.Text = "ELIMINAR";
+
+            }
+            else {
+                BtnEliminar.Text = "ACTIVAR";
+            }
+
+
+        }
+
 
 
         //Fin

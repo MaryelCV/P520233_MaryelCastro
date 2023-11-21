@@ -56,10 +56,7 @@ namespace Logica.Models
             int resultado = MiCnn.EjecutarDML("SPUsuariosAgregar");
 
             if (resultado > 0) R = true;
-            {
-                return R;
-            }
-
+            
             return R;
         }
         public bool Actualizar()
@@ -97,8 +94,18 @@ namespace Logica.Models
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@ID", this.UsuarioID));
+
+            int resultado = MiCnn.EjecutarDML("SPUsuariosEliminar");
+
+            if (resultado > 0) R = true;
+          
+
             return R;
         }
+
         public bool ConsultarPorID()
         {
             bool R = false;
