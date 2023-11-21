@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.CbVerActivos = new System.Windows.Forms.CheckBox();
             this.DgvListaUsuarios = new System.Windows.Forms.DataGridView();
             this.ColUsuarioID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,12 +82,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Buscar...";
             // 
-            // txtBuscar
+            // TxtBuscar
             // 
-            this.txtBuscar.Location = new System.Drawing.Point(254, 12);
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(224, 20);
-            this.txtBuscar.TabIndex = 1;
+            this.TxtBuscar.Location = new System.Drawing.Point(254, 12);
+            this.TxtBuscar.Name = "TxtBuscar";
+            this.TxtBuscar.Size = new System.Drawing.Size(224, 20);
+            this.TxtBuscar.TabIndex = 1;
+            this.TxtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
             // 
             // CbVerActivos
             // 
@@ -525,7 +526,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.DgvListaUsuarios);
             this.Controls.Add(this.CbVerActivos);
-            this.Controls.Add(this.txtBuscar);
+            this.Controls.Add(this.TxtBuscar);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -544,7 +545,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.TextBox TxtBuscar;
         private System.Windows.Forms.CheckBox CbVerActivos;
         private System.Windows.Forms.DataGridView DgvListaUsuarios;
         private System.Windows.Forms.GroupBox groupBox1;

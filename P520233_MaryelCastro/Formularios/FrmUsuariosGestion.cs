@@ -38,7 +38,7 @@ namespace P520233_MaryelCastro.Formularios
 
             CargarComboRolesUsuario();
 
-            CargarListaUsuarios();
+            CargarListaUsuarios(CbVerActivos.Checked);
 
             ActivarBotonAgregar();
 
@@ -72,28 +72,25 @@ namespace P520233_MaryelCastro.Formularios
         //Aqui van a estar todas las funcionalidades especificas y
         //que se pueden reutilizar DEBEN ser encapsuladas.
 
-        private void CargarListaUsuarios(bool VerActivos = true, string FiltroBusqueda = "")
+        private void CargarListaUsuarios(bool VerActivos, string FiltroBusqueda = "")
         {
 
             Logica.Models.Usuario miusuario = new Logica.Models.Usuario();
 
             DataTable lista = new DataTable();
 
-            DataTable listaConFiltro = new DataTable();
-
-            if (!string.IsNullOrEmpty(FiltroBusqueda.Trim()))
+            if (VerActivos)
             {
-                //Si hay filtro de busqueda
+                //si se quieren ver los usuarios activos
+                lista = miusuario.ListarActivos(FiltroBusqueda);
+                DgvListaUsuarios.DataSource = lista;
             }
-            else { 
-
-                //Si no hay filtro de busqueda
-            
+            else
+            {
+                //Usuarios inactivos
+                lista = miusuario.ListarInactivos(FiltroBusqueda);
+                DgvListaUsuarios.DataSource = lista;
             }
-
-            lista = miusuario.ListarActivos();
-
-            DgvListaUsuarios.DataSource = lista;
 
 
         }
@@ -240,7 +237,7 @@ namespace P520233_MaryelCastro.Formularios
                             MessageBox.Show("Usuario ingresado correctamente!", ":)", MessageBoxButtons.OK);
 
                             LimpiarForm();
-                            CargarListaUsuarios();
+                            CargarListaUsuarios(CbVerActivos.Checked);
                         }
                         else
                         {
@@ -394,7 +391,7 @@ namespace P520233_MaryelCastro.Formularios
                             MessageBox.Show("Usuario modificado correctamente!!", ";)", MessageBoxButtons.OK);
 
                             LimpiarForm();
-                            CargarListaUsuarios();
+                            CargarListaUsuarios(CbVerActivos.Checked);
                             ActivarBotonAgregar();
                         }
                     }
@@ -449,34 +446,79 @@ namespace P520233_MaryelCastro.Formularios
             this.Close();
         }
 
+
+
+
+
+
+
+
+
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
-            if (MiUsuarioLocal.UsuarioID > 0)
+            if (CbVerActivos.Checked)
             {
-                string msg = string.Format("¿Estás seguro de eliminar el usuario{0}.?", MiUsuarioLocal.Name);
-
-                DialogResult respuesta = MessageBox.Show(msg, "Confirmación requerida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (respuesta == DialogResult.Yes && MiUsuarioLocal.Eliminar())
+                //se procede a eliminar
+                if (MiUsuarioLocal.UsuarioID > 0)
                 {
-                    MessageBox.Show("El Usuarios ha sido ELIMINADO", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string msg = string.Format("¿Está seguro de eliminar al usuario {0}?", MiUsuarioLocal.Name);
 
-                    LimpiarForm();
-                    CargarListaUsuarios();
-                    ActivarBotonAgregar();
+                    DialogResult respuesta = MessageBox.Show(msg, "Confirmación requerida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
+                    if (respuesta == DialogResult.Yes && MiUsuarioLocal.Eliminar())
+                    {
+                        MessageBox.Show("El Usuario ha sido eliminado", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarForm();
+                        CargarListaUsuarios(CbVerActivos.Checked);
+                        ActivarBotonAgregar();
+                    }
+                }
+            }
+            else
+            {
+                //se procede a activar 
+                if (MiUsuarioLocal.UsuarioID > 0)
+                {
+                    string msg = string.Format("¿Está seguro de activar al usuario {0}?", MiUsuarioLocal.Name);
+
+                    DialogResult respuesta = MessageBox.Show(msg, "Confirmación requerida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (respuesta == DialogResult.Yes && MiUsuarioLocal.Activar())
+                    {
+                        MessageBox.Show("El Usuario ha sido activado", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarForm();
+                        CargarListaUsuarios(CbVerActivos.Checked);
+                        ActivarBotonAgregar();
+                    }
                 }
 
 
-
-
             }
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void CbVerActivos_CheckedChanged(object sender, EventArgs e)
         {
 
-            CargarListaUsuarios();
+            CargarListaUsuarios(CbVerActivos.Checked);
 
 
 
@@ -493,6 +535,27 @@ namespace P520233_MaryelCastro.Formularios
 
 
         }
+
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(TxtBuscar.Text.Trim()) && TxtBuscar.Text.Count() >= 3)
+            {
+                CargarListaUsuarios(CbVerActivos.Checked, TxtBuscar.Text.Trim());
+            }
+            else
+            {
+                CargarListaUsuarios(CbVerActivos.Checked);
+            }
+
+
+
+        }
+
+
+
+
+
 
 
 

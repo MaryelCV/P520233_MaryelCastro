@@ -14,5 +14,14 @@ namespace P520233_MaryelCastro.Globales
 
         public static Formularios.FrmUsuariosGestion 
             MiFormularioDeGestionDeUsuarios = new Formularios.FrmUsuariosGestion();
+
+        //Este sera el usuario validado en el login, tendra un scopre global
+        //en toda la aplicacion
+
+        public static Logica.Models.Usuario MiUsuarioGlobal = new Logica.Models.Usuario();
+
+
+
+
     }
 }
