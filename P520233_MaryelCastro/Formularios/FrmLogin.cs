@@ -40,7 +40,6 @@ namespace P520233_MaryelCastro.Formularios
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
-
             if (!string.IsNullOrEmpty(TxtUsuario.Text.Trim()) &&
                 !string.IsNullOrEmpty(TxtContrasennia.Text.Trim()))
             {
@@ -87,6 +86,11 @@ namespace P520233_MaryelCastro.Formularios
         {
             Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
             this.Hide();
+        }
+
+        private void TxtUsuario_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

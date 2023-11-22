@@ -41,5 +41,37 @@ namespace P520233_MaryelCastro.Formularios
         {
             Application.Exit();
         }
+
+
+
+
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+            LblUsuario.Text = Globales.ObjetosGlobales.MiUsuarioGlobal.Name + "(" +
+                             Globales.ObjetosGlobales.MiUsuarioGlobal.MiUsuarioRol.Rol + ")";
+
+            //ahora se debe ajustar los permisos de menús para que se muestren o no, dependiendo 
+            //del tipo de rol
+            switch (Globales.ObjetosGlobales.MiUsuarioGlobal.MiUsuarioRol.UsuarioRolID)
+            {
+                //admin
+                case 1:
+                    //como admin tiene acceso a todo, no es necesario ocultar opciones de menu
+                    break;
+
+                //empleado
+                case 2:
+                    //ocultan los menús correspondientes 
+                    MnuGestionUsuarios.Enabled = false;
+                    MnuGestionProductos.Enabled = false;
+                    MnuGestionCategorias.Enabled = false;
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
     }
 }

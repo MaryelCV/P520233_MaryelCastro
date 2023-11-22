@@ -49,7 +49,7 @@ namespace Logica.Models
 
 
 
-            MiCnn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", this.Contrasennia));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", ContrasenniaEncriptada));
             MiCnn.ListaDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));
             MiCnn.ListaDeParametros.Add(new SqlParameter("@Direccion", this.Direccion));
             MiCnn.ListaDeParametros.Add(new SqlParameter("@UsuarioRolID", this.MiUsuarioRol.UsuarioRolID));
@@ -75,7 +75,7 @@ namespace Logica.Models
 
             Tools.Crypto MiEncriptador = new Tools.Crypto();
             string ContrasenniaEncriptada = MiEncriptador.EncriptarEnUnSentido(this.Contrasennia);
-            MiCnn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", this.Contrasennia));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", ContrasenniaEncriptada));
 
 
             MiCnn.ListaDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));

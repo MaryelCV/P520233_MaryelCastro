@@ -49,6 +49,7 @@
             this.TxtUsuario.Size = new System.Drawing.Size(238, 24);
             this.TxtUsuario.TabIndex = 0;
             this.TxtUsuario.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtUsuario.TextChanged += new System.EventHandler(this.TxtUsuario_TextChanged);
             // 
             // TxtContrasennia
             // 
