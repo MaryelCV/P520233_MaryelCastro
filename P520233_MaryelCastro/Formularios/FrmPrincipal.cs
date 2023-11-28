@@ -73,5 +73,18 @@ namespace P520233_MaryelCastro.Formularios
             }
 
         }
+           
+
+
+
+        private void entradasYSalidasDeInventarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Globales.ObjetosGlobales.MiFormularioMovimientos.Visible)
+
+            {
+                Globales.ObjetosGlobales.MiFormularioMovimientos = new FrmMovimientosInventario();
+                Globales.ObjetosGlobales.MiFormularioMovimientos.Show();
+            }
+        }
     }
 }

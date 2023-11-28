@@ -20,6 +20,9 @@ namespace P520233_MaryelCastro.Globales
 
         public static Logica.Models.Usuario MiUsuarioGlobal = new Logica.Models.Usuario();
 
+        //Crear el formulario de movimientos
+        public static Formularios.FrmMovimientosInventario
+            MiFormularioMovimientos = new Formularios.FrmMovimientosInventario();
 
 
 
