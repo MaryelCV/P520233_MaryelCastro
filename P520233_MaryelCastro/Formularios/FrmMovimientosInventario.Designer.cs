@@ -457,6 +457,7 @@
             this.BtnAplicar.TabIndex = 3;
             this.BtnAplicar.Text = "APLICAR";
             this.BtnAplicar.UseVisualStyleBackColor = false;
+            this.BtnAplicar.Click += new System.EventHandler(this.BtnAplicar_Click);
             // 
             // BtnCancelar
             // 
