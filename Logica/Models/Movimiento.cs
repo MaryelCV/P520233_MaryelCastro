@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using CrystalDecisions.CrystalReports.Engine;
+using System.Xml.Linq;
+
 
 namespace Logica.Models
 {
@@ -25,11 +28,8 @@ namespace Logica.Models
         //Funciones
         public bool Agregar()
 
-
-
         {
             bool R = false;
-
 
 
             //Primero Hacemos un insert en el encabezado y RECOLECTAMOS que se genera, esto es 
@@ -37,7 +37,7 @@ namespace Logica.Models
 
             Conexion MyCnn = new Conexion();
 
-            MyCnn.ListaDeParametros.Add(new SqlParameter("@Fecha", this.Fecha ));
+            MyCnn.ListaDeParametros.Add(new SqlParameter("@Fecha", this.Fecha));
             MyCnn.ListaDeParametros.Add(new SqlParameter("@Anotaciones", this.Anotaciones));
             MyCnn.ListaDeParametros.Add(new SqlParameter("@TipoMovimiento", this.MiTipo.MovimientoTipoID));
             MyCnn.ListaDeParametros.Add(new SqlParameter("@UsuarioID", this.MiUsuario.UsuarioID));
@@ -51,6 +51,12 @@ namespace Logica.Models
             {
                 //Especializado
                 IDMovimientoRecienCreado = Convert.ToInt32(RetornoSPAgregar.ToString());
+
+                //Asignamos al objeto ID generado por el SP
+
+                this.MovimientoID = IDMovimientoRecienCreado;
+
+
 
                 foreach (MovimientoDetalle item in this.Detalles)
                 {
@@ -129,6 +135,36 @@ namespace Logica.Models
             return R;
         }
 
+        public ReportDocument Imprimir(ReportDocument document)
+        {
+            ReportDocument R = document;
+            //Hacemos un objeto de tipo Crystal (la clase que creamos)
+            Tools.Crystal ObjCrystal = new Tools.Crystal(R);
 
+            DataTable datos = new DataTable();
+            Conexion MyCnn = new Conexion();
+
+            MyCnn.ListaDeParametros.Add(new SqlParameter("@ID", this.MovimientoID));
+
+            datos = MyCnn.EjecutarSelect("SPMovimientoImprimir");
+
+            if (datos != null && datos.Rows.Count > 0)
+            {
+                ObjCrystal.Datos = datos;
+
+                R = ObjCrystal.GenerarReporte();
+
+            }
+            return R;
+
+        }
+
+
+
+
+
+
+            //FIN
+
+        }
     }
-}
