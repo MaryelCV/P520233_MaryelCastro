@@ -552,6 +552,11 @@ namespace P520233_MaryelCastro.Formularios
 
         }
 
+        private void CbUsuarioActivo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 

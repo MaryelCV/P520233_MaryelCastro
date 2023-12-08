@@ -115,6 +115,7 @@
             this.CboxTipo.Name = "CboxTipo";
             this.CboxTipo.Size = new System.Drawing.Size(153, 21);
             this.CboxTipo.TabIndex = 3;
+            this.CboxTipo.SelectedIndexChanged += new System.EventHandler(this.CboxTipo_SelectedIndexChanged);
             // 
             // label2
             // 

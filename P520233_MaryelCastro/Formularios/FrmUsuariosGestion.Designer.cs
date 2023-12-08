@@ -284,6 +284,7 @@
             this.CbUsuarioActivo.TabIndex = 16;
             this.CbUsuarioActivo.Text = "Activo";
             this.CbUsuarioActivo.UseVisualStyleBackColor = true;
+            this.CbUsuarioActivo.CheckedChanged += new System.EventHandler(this.CbUsuarioActivo_CheckedChanged);
             // 
             // TxtUsuarioDireccion
             // 

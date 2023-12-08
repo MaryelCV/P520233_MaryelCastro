@@ -301,6 +301,11 @@ namespace P520233_MaryelCastro.Formularios
             return R;
         }
 
+        private void CboxTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 

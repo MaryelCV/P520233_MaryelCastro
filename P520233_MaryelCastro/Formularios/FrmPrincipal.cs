@@ -86,5 +86,23 @@ namespace P520233_MaryelCastro.Formularios
                 Globales.ObjetosGlobales.MiFormularioMovimientos.Show();
             }
         }
+
+
+        //Formulario de gestion de productos
+        private void MnuGestionProductos_Click(object sender, EventArgs e)
+        {
+
+            if (!Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos.Visible)
+            {
+                //Hago una reintancia del objeto para asegurar que inicie en limpio
+                Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos = new FrmProductosGestion();
+
+                Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos.Show();
+
+            }
+        }
+
+
+        //fin
     }
 }

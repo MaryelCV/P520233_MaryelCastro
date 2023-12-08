@@ -15,6 +15,18 @@ namespace P520233_MaryelCastro.Globales
         public static Formularios.FrmUsuariosGestion 
             MiFormularioDeGestionDeUsuarios = new Formularios.FrmUsuariosGestion();
 
+
+
+
+        //FORMULARIO DE GESTION DE PRODUCTO
+        public static Formularios.FrmProductosGestion
+            MiFormularioDeGestionDeProductos = new Formularios.FrmProductosGestion();
+
+
+
+
+
+
         //Este sera el usuario validado en el login, tendra un scopre global
         //en toda la aplicacion
 
